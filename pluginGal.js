@@ -37,10 +37,9 @@
 					       	success: function(data) {
 						       	if(data.meta.code === 200 && data.data.length) {
 						        	for(var i = 0; i < data.data.length; i++) {
-						        		var thisMedia = data.data[i],
-						        			item;
+						        		var thisMedia = data.data[i],item;
 						        		if(thisMedia.type === 'image') {
-							       			item = '<img class="instaphotos" src="'+thisMedia.images.standard_resolution.url+'" alt="Instagram Image" data-filter="'+thisMedia.filter+'" />';
+							       			item = '<li><a href="#"><img class="instaphotos" src="'+thisMedia.images.standard_resolution.url+'" alt="Instagram Image" data-filter="'+thisMedia.filter+'" /></a></li>';
 								       	}
 							       		el.append(item);
 							       	}

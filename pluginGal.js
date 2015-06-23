@@ -1,5 +1,4 @@
 (function($) {
-	var i=0;
     $.fn.fetchUserImg= function(options) {
 		if(!this.length) { 
 			return this; 
@@ -8,61 +7,68 @@
         var defaults = {
             username: null,
             clientID: null,
-            limit:3,
+            limit:5,
+            id:null,
             loadMore: null,
             error: function() {},
             success: function() {}
         }
-
-        plugin = this;
-		plugin.settings = {}
- 		plugin.settings = $.extend({}, defaults, options);
- 		el = $(this);
- 		el.append('<a href="#" id="loadmore">Load More</a>');
-        loadContent();
-        if(plugin.settings.loadMore){
-        	$("#loadmore").click(function(){	
-        	plugin.settings.limit+=3;
+		settings = {}
+ 		settings = $.extend({}, defaults, options);
+ 		elem = $(this);
+ 		loadContent();
+        if(settings.loadMore){
+        	elem.append('<a href="#" id="loadmore">Load More</a>');
+        	$("#loadmore").click(function(){
         	loadContent();
         });
         }
+        else{
+        	settings.limit=33;
+        }
         
-    },
-    
+    }
+
+    changeBackground = function(){
+    	var imgs=$(".instaphotos");
+    	imgs.each(function(){
+    		var canvs= document.createElement('canvas');
+    		var context = canvs.getContext('2d');
+			context.drawImage(imgs, 0, 0,300,300);
+			data = context.getImageData(0, 0,300,300).data;
+			imgs.css("background","black");
+    	});	
+    }   
     loadContent = function(){
-        el.each(function() {
+        elem.each(function() {
 	        $.ajax({
 		       	type: 'GET',
-		       	url: 'https://api.instagram.com/v1/users/search?q='+plugin.settings.username+'&client_id='+plugin.settings.clientID+'&callback=?',
+		       	url: 'https://api.instagram.com/v1/users/search?q='+settings.username+'&client_id='+settings.clientID+'&callback=?',
 		       	dataType: 'jsonp',
 		       	success: function(data) {
 			        var usr = data.data[0];
-			        if(usr.username === plugin.settings.username) {
-						var url = 'https://api.instagram.com/v1/users/'+usr.id+'/media/recent/?client_id='+plugin.settings.clientID+'&count='+plugin.settings.limit+'&callback=?';
-			        	$.ajax({
-						    type: 'GET',
-						    url: url,
-					       	dataType: 'jsonp',
-					       	success: function(data) {
-						       	if(data.meta.code === 200 && data.data.length) {
-						        	for(; i < plugin.settings.limit && i<=data.data.length;) {
-						       			var instimg = data.data[i],item;
-						        		if(instimg.type === 'image') {
-						        			item = '<li><a target="_blank" href="'+instimg.link+'"><img class="instaphotos" src="'+instimg.images.standard_resolution.url+'" alt="Instagram Image" data-filter="'+instimg.filter+'" /></a></li>';							       			
-						        			i++;
-						        			el.append(item);
-								       	}
-							       	}
-							       	if(i>data.data.length){
-							       		window.alert("No More Images available");
-							       	}
-							       		
-						       	} 	
-							}
-						});	
-				    }
+					var url = 'https://api.instagram.com/v1/users/'+usr.id+'/media/recent/?client_id='+settings.clientID+'&count='+settings.limit+'&callback=?';
+					if(settings.id!=null){
+						url+='&max_id='+settings.id;
+					}
+		        	$.ajax({
+					    type: 'GET',
+					    url: url,
+					    dataType: 'jsonp',
+				       	success: function(data) {
+					       for( var i=0;i<data.data.length;i++) {
+					    		var instimg = data.data[i],item;
+					       		if(instimg.type === 'image'){
+					       			item=document.createElement("li");
+					       			$(item).html('<a target="_blank" href="'+instimg.link+'"><img class="instaphotos" src="'+instimg.images.standard_resolution.url+'" alt="Instagram Image" data-filter="'+instimg.filter+'" /></a>').css("background-color","#f1f1f1").appendTo(elem);
+					       		}
+					       	} 	
+					       	settings.id=data.data[i-1].id;
+						}
+					});
 		        }
 	        });
 	    });
     }
+
 })(jQuery);

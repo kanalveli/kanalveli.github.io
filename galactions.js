@@ -1,10 +1,9 @@
 $(document).ready(function(){
 
 	$("#instaimgs").fetchUserImg({
-		clientID:'3d4a6c6f983c463e9f0d688bdf892609',
+		clientID:'d05f3c6e609e4925b9bd19ce67a505f8',
 			username:'kanalveli',
 			loadMore:true
-		});
-
+	});
 
 });

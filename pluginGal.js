@@ -7,7 +7,7 @@
         var defaults = {
             username: 'kanalveli',
             clientID: null,
-            limit:15,
+            limit:20,
             id:null,
             loadMore:false,
             usrid:null,

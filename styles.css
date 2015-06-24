@@ -1,17 +1,11 @@
 .instaphotos{
 	max-width:200px;
 	max-height:200px;
-	float:left;
 	padding:20px;
 }
-ul{
-	list-style-type: none;
-}
-div{
+.bgdiv{
+	display:inline-block;
+	width:250px;
 	margin:30px;
-}
-.pgtitle, p a:hover, p a:active, p a:visited, p a{
-	color: #517FA4;
-	font-size: 30px;
-	font-weight:bold;
+	float:left;
 }

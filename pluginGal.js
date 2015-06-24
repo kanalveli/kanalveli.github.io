@@ -7,7 +7,7 @@
         var defaults = {
             username: 'kanalveli',
             clientID: null,
-            limit:5,
+            limit:4,
             id:null,
             loadMore:false,
             usrid:null,
@@ -31,8 +31,7 @@
 				        	loadContent();
 				        	});
 				        }
-				        else{
-				        	settings.limit=33; 
+				        else{ 
 				        	$(window).scroll(function() {
 				   				if($(window).scrollTop() + $(window).height() == $(document).height()) {
 				   					loadContent();

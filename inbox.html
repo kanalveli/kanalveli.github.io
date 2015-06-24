@@ -1,13 +1,12 @@
 <!doctype html>
 <html>
-	<head>
-		<title>HOGWARTS | GALLERY</title>
+	<head>	
+		<title>HOGWARTS | Inbox</title>
 		<link href="http://fonts.googleapis.com/css?family=Ubuntu:300,400,500,700" rel="stylesheet" type="text/css">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
 		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 		<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js" ></script>
 		<link rel="stylesheet" href="css/styles.css">
-		<link rel="stylesheet" href="css/galstyles.css">
 	</head>
 	<body>
 		<div class="navbar navbar-default navbar-fixed-top">
@@ -41,8 +40,8 @@
 		<div class="pagebar navbar navbar-default">
 					<ul class="nav navbar-nav collapse navbar-collapse">
 					<li><a href="dashboard.html"><span class="glyphicon glyphicon-dashboard"></span>DashBoard</a></li>
-					<li><a href="InstaImages.html"><span class="glyphicon text-success glyphicon-user"> Gallery</span></a></li>
-					<li class="dropdown"><a><span><span class="glyphicon glyphicon-envelope"></span>Mail Box</span></a>
+					<li><a href="InstaImages.html"><span class="glyphicon glyphicon-user"> Gallery</span></a></li>
+					<li class="dropdown"><a><span class="text-success"><span class="glyphicon glyphicon-envelope"></span>Mail Box</span></a>
 						<ul class="dropdown-menu">
 							<li><a href="inbox.html">Inbox</a></li>
 							<li><a href="#">View Message</a></li>
@@ -108,8 +107,130 @@
 					</li>
 					</ul>			
 		</div>
-		<div id="instaimgs" class="container-fluid pagecontent">
-		</div>
+		<div class="container-fluid pagecontent">
+			<div class="row-head col-md-12 col-lg-12">
+				<div class="row">
+					<div class="col-md-2 col-lg-2">
+						<a href="#" class="btn btn-success btn-block">Compose</a>
+					</div>
+					<div class="col-md-6 col-lg-6">
+						<h4>Inbox</h4>
+					</div>
+					<div class="col-md-4">
+						<div class="col-lg-9 col-md-9"><input type="text" placeholder="Search" class="form-control"></input></div>
+						<div class="col-lg-3 col-md-3"><a class="btn btn-block btn-success" href="#"><span class="glyphicon glyphicon-search"></span></a></div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-lg-2 col-md-2">
+					<ul class="nav">
+						<li class="active"><a href="inbox.html">Inbox<span class="badge pull-right">4</span></a></li>
+						<li><a href="#">Sent</a></li>
+						<li><a href="#">Draft</a></li>
+						<li><a href="#">Spam</a></li>
+						<li><a href="#">Trash</a></li>
+					</ul>
+				</div>
+				<div class="col-lg-10 col-md-10">
+					<div class="dashitem" >
+						<table height="500" class="table table-hover">
+							<thead>
+								<tr>
+									<th><input type="checkbox"></th>
+									<th></th>
+									<th><span class="text-muted">Showing 9 of 312</span></th>
+									<th><a class="pull-right" href="#"><span class="glyphicon glyphicon-chevron-right"></span></a>
+	 					    		<a class="pull-right" href="#"><span class="glyphicon glyphicon-chevron-left"></span></a>
+	 					    		</th>
+	 					    		<th>
+	 					    		<a href="#" class="pull-right col-lg-2" data-toggle="tooltip" title="Reload">
+										<span class="glyphicon glyphicon-refresh"></span>
+									</a>
+									</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td class="col-lg-1"><input type="checkbox"></td>
+									<td class="col-lg-1"><span class="glyphicon glyphicon-star"></span></td>
+									<td class="col-lg-2">Google</td>
+									<td class="col-lg-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit</td>
+									<td class="col-lg-1"></td>
+									<td class="col-lg-2">21 march</td>
+								</tr>
+								<tr>
+									<td><input type="checkbox"></td>
+									<td><span class="glyphicon glyphicon-star-empty"></span></td>
+									<td>Google</td>
+									<td>Lorem ipsum dolor sit amet, consectetur adipisicing elit</td>
+									<td></td>
+									<td>21 march</td>
+								</tr>
+								<tr>
+									<td><input type="checkbox"></td>
+									<td><span class="glyphicon glyphicon-star"></span></td>
+									<td>Code Academy</td>
+									<td>Lorem ipsum dolor sit amet, consectetur adipisicing elit</td>
+									<td></td>
+									<td>21 march</td>
+								</tr>
+								<tr>
+									<td><input type="checkbox"></td>
+									<td><span class="glyphicon glyphicon-star"></span></td>
+									<td>Hermione Granger</td>
+									<td>Lorem ipsum dolor sit amet, consectetur adipisicing elit</td>
+									<td></td>
+									<td>21 march</td>
+								</tr>
+								<tr>
+									<td><input type="checkbox"></td>
+									<td><span class="glyphicon glyphicon-star-empty "></span></td>
+									<td>support@Hogwarts</td>
+									<td>Lorem ipsum dolor sit amet, consectetur adipisicing elit</td>
+									<td></td>
+									<td>21 march</td>
+								</tr>
+								<tr>
+									<td><input type="checkbox"></td>
+									<td><span class="glyphicon glyphicon-star"></span></td>
+									<td>me</td>
+									<td>Lorem ipsum dolor sit amet, consectetur adipisicing elit</td>
+									<td></td>
+									<td>21 march</td>
+								</tr>
+								<tr>
+									<td><input type="checkbox"></td>
+									<td><span class="glyphicon glyphicon-star"></span></td>
+									<td>Apothecary</td>
+									<td>Lorem ipsum dolor sit amet, consectetur adipisicing elit</td>
+									<td></td>
+									<td>21 march</td>
+								</tr>
+								<tr>
+									<td><input type="checkbox"></td>
+									<td><span class="glyphicon glyphicon-star-empty"></span></td>
+									<td>Flourish & Botts</td>
+									<td>Lorem ipsum dolor sit amet, consectetur adipisicing elit</td>
+									<td></td>
+									<td>21 march</td>
+								</tr>
+								<tr>
+									<td><input type="checkbox"></td>
+									<td><span class="glyphicon glyphicon-star"></span></td>
+									<td>Mom</td>
+									<td>Lorem ipsum dolor sit amet, consectetur adipisicing elit</td>
+									<td><span class="glyphicon glyphicon-attach"></span></td>
+									<td>21 march</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+			<div class="copyright dashitem container-fluid">
+				<p>2015 @ Hogwarts by kanal</p>
+			</div>
 		</div><div id="chatbox" class="chatbox">
 			<button class="btn btn-link btn-lg pull-right" id="back">&times;</button>
 			<p class="chat-title">Chat</p> 
@@ -162,7 +283,5 @@
 			<input id="post" type="text" placeholder="Enter Your Message" class="form-control input-sm col-md-2"></input>
 		</div>
 		<script type="text/javascript" src="js/projectactions.js"></script>
-		<script type="text/javascript" src="js/pluginGal.js"></script>
-		<script type="text/javascript" src="js/galactions.js"></script>
 	</body>
 </html>

@@ -1,0 +1,12 @@
+.instaphotos{
+	max-width:200px;
+	max-height:250px;
+	padding:20px;
+}
+.bgdiv{
+	display:inline-block;
+	width:240px;
+	margin:20px;
+	margin-left:50px;
+	float:left;
+}

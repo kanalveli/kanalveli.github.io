@@ -10,28 +10,46 @@
             limit:5,
             id:null,
             loadMore:false,
+            usrid:null,
             error: function() {},
             success: function() {}
         }
 		settings = {}
  		settings = $.extend({}, defaults, options);
  		elem = $(this);
-        if(settings.loadMore){
-        	elem.after('<a href="#" id="loadmore">Load More</a>');
-        	$("#loadmore").css("float","left").click(function(){
-        	loadContent();
-        	});
-        }
-        else{
-        	settings.limit=33; 
-        	$(window).scroll(function() {
-   				if($(window).scrollTop() + $(window).height() > $(document).height() - 50) {
-   					loadContent();
-   				}
-			});
-        }
-
- 		loadContent();
+ 		elem.each(function() {
+        	if(settings.clientID){
+		        $.ajax({
+			       	type:'GET',
+			       	url: 'https://api.instagram.com/v1/users/search?q='+settings.username+'&client_id='+settings.clientID+'&callback=?',
+			       	dataType: 'jsonp',
+			       	success: function(data) { 
+			       		settings.usrid=data.data[0].id;
+						if(settings.loadMore){
+				        	elem.after('<input id="loadmore" type="button" value="Load More">');
+				        	$("#loadmore").css("float","right").click(function(){
+				        	loadContent();
+				        	});
+				        }
+				        else{
+				        	settings.limit=33; 
+				        	$(window).scroll(function() {
+				   				if($(window).scrollTop() + $(window).height() == $(document).height()) {
+				   					loadContent();
+				   				}
+							});
+				        }
+				        loadContent();
+				    },
+			        error: function(jqXHR, textStatus, errorThrown){
+						console.log(textStatus,errorThrown);
+					}
+		        });
+			}
+			else{
+				console.log("client ID missing");
+			}
+	    });
  	}
 
  	changeBackground=function(imgsrc,item){
@@ -57,49 +75,31 @@
 	}
 
     loadContent = function(){
-        elem.each(function() {
-        	if(settings.clientID){
-		        $.ajax({
-			       	type:'GET',
-			       	url: 'https://api.instagram.com/v1/users/search?q='+settings.username+'&client_id='+settings.clientID+'&callback=?',
-			       	dataType: 'jsonp',
-			       	success: function(data) { 
-				        var usr = data.data[0];
-						var url = 'https://api.instagram.com/v1/users/'+usr.id+'/media/recent/?client_id='+settings.clientID+'&count='+settings.limit+'&callback=?';
-						if(settings.id!=null){
-							url+='&max_id='+settings.id;
-						}
-			        	$.ajax({
-						    type: 'GET',
-						    url: url,
-						    dataType: 'jsonp',
-					       	success: function(data) {
-						       for( var i=0;i<data.data.length;i++){
-						    		var instimg = data.data[i],item;
-						       		if(instimg.type === 'image'){
-						       			item=document.createElement("div");
-						       			$(item).html('<a target="_blank" href="'+instimg.link+'"><img class="instaphotos" src="'+instimg.images.standard_resolution.url+'" alt="Instagram Image" data-filter="'+instimg.filter+'" /></a>')
-						       					.addClass("bgdiv")
-						       					.appendTo(elem);
-						       			changeBackground(instimg,item);
-						       		}
-						       	} 	
-						       	settings.id=data.data[i-1].id;
-							},
-							error: function(jqXHR, textStatus, errorThrown){
-								console.log(textStatus,errorThrown);
-							}
-						});
-			        },
-			        error: function(jqXHR, textStatus, errorThrown){
-						console.log(textStatus,errorThrown);
+		var url = 'https://api.instagram.com/v1/users/'+settings.usrid+'/media/recent/?client_id='+settings.clientID+'&count='+settings.limit+'&callback=?';
+		if(settings.id!=null){
+			url+='&max_id='+settings.id;
+		}
+		$.ajax({
+			type: 'GET',
+		    url: url,
+	  	    dataType: 'jsonp',
+			success: function(data) {
+			    for( var i=0;i<data.data.length;i++){
+					var instimg = data.data[i],item;
+					if(instimg.type === 'image'){
+						item=document.createElement("div");
+						$(item).html('<a target="_blank" href="'+instimg.link+'"><img class="instaphotos" src="'+instimg.images.standard_resolution.url+'" alt="Instagram Image" data-filter="'+instimg.filter+'" /></a>')
+								.addClass("bgdiv")
+								.appendTo(elem);
+						changeBackground(instimg,item);
 					}
-		        });
+			 	} 	
+			 	settings.id=data.data[i-1].id;
+			},
+			error: function(jqXHR, textStatus, errorThrown){
+				console.log(textStatus,errorThrown);
 			}
-			else{
-				console.log("client ID missing");
-			}
-	    });
-    }
+		});
+	}
 
 })(jQuery);

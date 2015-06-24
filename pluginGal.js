@@ -7,7 +7,7 @@
         var defaults = {
             username: 'kanalveli',
             clientID: null,
-            limit:4,
+            limit:15,
             id:null,
             loadMore:false,
             usrid:null,
@@ -74,6 +74,7 @@
 	}
 
     loadContent = function(){
+    	console.log('a');
 		var url = 'https://api.instagram.com/v1/users/'+settings.usrid+'/media/recent/?client_id='+settings.clientID+'&count='+settings.limit+'&callback=?';
 		if(settings.id!=null){
 			url+='&max_id='+settings.id;
@@ -83,6 +84,7 @@
 		    url: url,
 	  	    dataType: 'jsonp',
 			success: function(data) {
+				if(data.data.length){
 			    for( var i=0;i<data.data.length;i++){
 					var instimg = data.data[i],item;
 					if(instimg.type === 'image'){
@@ -93,9 +95,10 @@
 						changeBackground(instimg,item);
 					}
 			 	} 	
-			 	settings.id=data.data[i-1].id;
+			 	settings.id=data.data[data.data.length-1].id;
 			 	if(!settings.loadMore){
 			 		$(window).bind('scroll',autoload);
+			 	}
 			 	}
 			},
 			error: function(jqXHR, textStatus, errorThrown){

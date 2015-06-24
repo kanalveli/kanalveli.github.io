@@ -1,11 +1,12 @@
 .instaphotos{
 	max-width:200px;
 	max-height:200px;
-	padding:20px;
+	padding:25px;
 }
 .bgdiv{
 	display:inline-block;
 	width:250px;
 	margin:30px;
+	padding:auto;
 	float:left;
 }

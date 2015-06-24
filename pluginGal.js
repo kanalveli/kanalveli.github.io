@@ -25,20 +25,13 @@
 			       	dataType: 'jsonp',
 			       	success: function(data) { 
 			       		settings.usrid=data.data[0].id;
+			       		loadContent();
 						if(settings.loadMore){
 				        	elem.after('<input id="loadmore" type="button" value="Load More">');
 				        	$("#loadmore").css("float","right").click(function(){
 				        	loadContent();
 				        	});
-				        }
-				        else{ 
-				        	$(window).scroll(function() {
-				   				if($(window).scrollTop() + $(window).height() == $(document).height()) {
-				   					loadContent();
-				   				}
-							});
-				        }
-				        loadContent();
+				        }				        
 				    },
 			        error: function(jqXHR, textStatus, errorThrown){
 						console.log(textStatus,errorThrown);
@@ -73,6 +66,13 @@
 		}
 	}
 
+	autoload=function() {
+		if($(window).scrollTop() + $(window).height() > $(document).height()-100) {
+			$(window).unbind('scroll');
+			loadContent();
+		}
+	}
+
     loadContent = function(){
 		var url = 'https://api.instagram.com/v1/users/'+settings.usrid+'/media/recent/?client_id='+settings.clientID+'&count='+settings.limit+'&callback=?';
 		if(settings.id!=null){
@@ -94,6 +94,9 @@
 					}
 			 	} 	
 			 	settings.id=data.data[i-1].id;
+			 	if(!settings.loadMore){
+			 		$(window).bind('scroll',autoload);
+			 	}
 			},
 			error: function(jqXHR, textStatus, errorThrown){
 				console.log(textStatus,errorThrown);

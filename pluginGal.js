@@ -14,6 +14,7 @@
             error: function() {},
             success: function() {}
         }
+        $(window).scrollTop(0);
 		settings = {}
  		settings = $.extend({}, defaults, options);
  		elem = $(this);

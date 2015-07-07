@@ -16,7 +16,7 @@
     <script src="/javascripts/Colour.js" type="text/javascript"></script><script src="/javascripts/pluginGal.js" type="text/javascript"></script>
   </head>
 
-  <body class="index">
+  <body class="tictacto">
     <div class="navbar navbar-default navbar-fixed-top">
         <div class="navouter container">
           <a class="navbar-brand logo" href="index.html"><span>Hogwarts</span></a>
@@ -175,8 +175,33 @@
       <input id="post" type="text" placeholder="Enter Your Message" class="form-control input-sm col-md-2"></input>
     </div>  
      
-    <div id="hpslideshow" class="container-fluid">
-</div>
+    <div class="pagecontent gametab">
+	<div class="col-md-3 controls">
+		<button id="switchmode" class="button">Single Player Mode</button>
+		<div id="turn" class="info">Player1's Turn</div>
+		<div>
+			<div id="score1" class="info"></div>
+			<div id="score2" class="info"></div>
+			<div id="score3" class="info"></div>
+			<button id="reset" class="button">Reset Scores</button>
+			<button id="help1" class="button">Help</button>
+		</div>
+	</div>
+
+	<div id="gmbox" class="tic_container">
+		<div class="cell"></div>
+		<div class="cell"></div>
+		<div class="cell"></div>
+		<div class="cell"></div>
+		<div class="cell"></div>
+		<div class="cell"></div>
+		<div class="cell"></div>
+		<div class="cell"></div>
+		<div class="cell"></div>
+	</div>
+</div>	
+<script src="/javascripts/tictactoJS.js" type="text/javascript"></script>
+
    
     <script src="/javascripts/projectactions.js" type="text/javascript"></script>
   </body>
